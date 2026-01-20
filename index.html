@@ -10,6 +10,130 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // custom tailwind stuff
+      tailwind.config = {
+        theme: {
+          extend: {
+            animation: {
+              float: 'float 3s ease-in-out infinite',
+              glow: 'glow 2s ease-in-out infinite', // for the NEW badge
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+              glow: {
+                '0%, 100%': { boxShadow: '0 0 20px rgba(0, 255, 136, 0.3)' },
+                '50%': { boxShadow: '0 0 40px rgba(0, 255, 136, 0.6)' },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* hover effects for cards n stuff */
+      .card-hover {
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      /* main cta buttons */
+      .cta {
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          filter 0.2s ease;
+      }
+
+      .cta:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 30px rgba(251, 9, 180, 0.4);
+        filter: brightness(1.1);
+      }
+
+      .cta:active {
+        transform: scale(0.98);
+      }
+
+      /* outline btn hover */
+      .cta-alt {
+        transition: all 0.3s ease;
+      }
+
+      .cta-alt:hover {
+        background-color: rgba(0, 255, 136, 0.1);
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+      }
+
+      /* nav underline animation - looks cool */
+      .nav-item {
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      .nav-item::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(135deg, #f7e93f 0%, #fb09b4 52%, #9100f8 100%);
+        transition: width 0.3s ease;
+      }
+
+      .nav-item:hover::after {
+        width: 100%;
+      }
+
+      /* social icons */
+      .social {
+        transition:
+          transform 0.3s ease,
+          border-color 0.3s ease,
+          background-color 0.3s ease;
+      }
+
+      .social:hover {
+        transform: scale(1.15);
+        border-color: #00ff88;
+        background-color: rgba(0, 255, 136, 0.1);
+      }
+
+      /* play btn on episode cards */
+      .play {
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .play:hover {
+        transform: translate(-50%, -50%) scale(1.15);
+        box-shadow: 0 0 30px rgba(251, 9, 180, 0.5);
+      }
+
+      /* why choose section cards */
+      .feature-card {
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(53, 17, 100, 0.5);
+      }
+
+    </style>
   </head>
 
   <body class="bg-[#1A0B2E] text-white font-[Inter]">
@@ -21,14 +145,14 @@
               class="w-[137px] h-[20px] aspect-[137/20] lg:w-[219px] lg:h-[32px] lg:aspect-[219/32]" />
 
             <div class="hidden lg:flex items-center gap-8 text-base font-medium text-white/90">
-              <a href="#about" class="hover:text-white">About</a>
-              <a href="#episodes" class="hover:text-white">Episodes</a>
-              <a href="#host" class="hover:text-white">Host</a>
+              <a href="#about" class="nav-item hover:text-white">About</a>
+              <a href="#episodes" class="nav-item hover:text-white">Episodes</a>
+              <a href="#host" class="nav-item hover:text-white">Host</a>
             </div>
 
             <div class="hidden lg:flex items-center">
               <button
-                class="rounded-full flex gap-2 px-4 py-3 text-base font-semibold bg-[linear-gradient(135deg,#F7E93F_0%,#FB09B4_52%,#9100F8_100%)]">
+                class="cta rounded-full flex gap-2 px-4 py-3 text-base font-semibold bg-[linear-gradient(135deg,#F7E93F_0%,#FB09B4_52%,#9100F8_100%)]">
                 Subscribe
                 <img src="assets/ArrowRight.svg" alt="" />
               </button>
@@ -45,13 +169,13 @@
         <img src="assets/hero-bg.png" alt="Hero background" class="absolute inset-0 h-full w-full object-cover" />
         <div class="relative mx-auto max-w-[1600px] px-5 lg:px-[200px]">
           <div class="flex flex-col items-center gap-10 py-12 lg:py-[110px] min-h-[466px] lg:min-h-[760px]">
-            <div class="relative">
+            <div class="relative animate-float">
               <img src="assets/hero-circle.png" alt="Podcast circle"
                 class="h-[200px] w-[200px] lg:h-[350px] lg:w-[350px]" />
               <img src="assets/microphone.png" alt="Microphone"
                 class="absolute inset-0 m-auto h-[90px] w-[90px] lg:h-[160px] lg:w-[160px]" />
               <span
-                class="absolute right-3 top-3 lg:right-4 lg:top-4 rounded-full bg-[#00FF88] px-4 py-2 text-[16px] lg:text-[18px] font-semibold text-[#1A0B2E] shadow-[0_3px_27px_rgba(0,255,136,0.5)]">NEW</span>
+                class="absolute right-3 top-3 lg:right-4 lg:top-4 rounded-full bg-[#00FF88] px-4 py-2 text-[16px] lg:text-[18px] font-semibold text-[#1A0B2E] shadow-[0_3px_27px_rgba(0,255,136,0.5)] animate-glow">NEW</span>
             </div>
 
             <div class="text-center max-w-[550px]">
@@ -63,12 +187,12 @@
 
             <div class="flex flex-col sm:flex-row items-center gap-4">
               <button
-                class="flex items-center gap-2 rounded-full px-5 py-3 text-base font-semibold bg-[linear-gradient(135deg,#F7E93F_0%,#FB09B4_52%,#9100F8_100%)]">
+                class="cta flex items-center gap-2 rounded-full px-5 py-3 text-base font-semibold bg-[linear-gradient(135deg,#F7E93F_0%,#FB09B4_52%,#9100F8_100%)]">
                 <img src="assets/spotify.png" alt="Spotify" class="h-5 w-5" />
                 Listen on Spotify
               </button>
               <button
-                class="flex items-center gap-2 rounded-full border border-[#00FF88] px-5 py-3 text-base font-semibold text-[#00FF88]">
+                class="cta-alt flex items-center gap-2 rounded-full border border-[#00FF88] px-5 py-3 text-base font-semibold text-[#00FF88]">
                 <img src="assets/message.png" alt="Email" class="h-5 w-5" />
                 Subscribe
               </button>
@@ -128,7 +252,8 @@
         </div>
 
         <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
-          <div class="lg:col-span-4 lg:row-span-1 rounded-[40px] bg-[#351164]/40 p-10">
+          <!-- audio quality -->
+          <div class="feature-card lg:col-span-4 lg:row-span-1 rounded-[40px] bg-[#351164]/40 p-10">
             <img src="assets/headphone.png" alt="Audio" class="h-[60px] w-[60px]" />
             <h3 class="mt-4 text-[22px] leading-[27px] lg:text-[24px] lg:leading-[29px] font-bold">
               Premium Audio Quality
@@ -140,7 +265,7 @@
           </div>
 
           <div class="lg:col-span-8 grid gap-6">
-            <div class="rounded-[40px] bg-[#351164]/40 p-10">
+            <div class="feature-card rounded-[40px] bg-[#351164]/40 p-10">
               <img src="assets/device.png" alt="Mobile" class="h-[60px] w-[60px]" />
               <h3 class="mt-4 text-[22px] leading-[27px] lg:text-[24px] lg:leading-[29px] font-bold">
                 Mobile Friendly
@@ -149,7 +274,7 @@
                 Listen on the go with seamless mobile experience and offline downloads.
               </p>
             </div>
-            <div class="rounded-[40px] bg-[#351164]/40 p-10">
+            <div class="feature-card rounded-[40px] bg-[#351164]/40 p-10">
               <img src="assets/location.png" alt="Global" class="h-[60px] w-[60px]" />
               <h3 class="mt-4 text-[22px] leading-[27px] lg:text-[24px] lg:leading-[29px] font-bold">
                 Global Community
@@ -160,7 +285,7 @@
             </div>
           </div>
 
-          <div class="lg:col-span-8 rounded-[40px] bg-[#351164]/40 p-10">
+          <div class="feature-card lg:col-span-8 rounded-[40px] bg-[#351164]/40 p-10">
             <img src="assets/zap-fast.svg" alt="Interviews" class="h-[60px] w-[60px]" />
             <h3 class="mt-4 text-[22px] leading-[27px] lg:text-[24px] lg:leading-[29px] font-bold">
               Exclusive Interviews
@@ -172,7 +297,7 @@
             </p>
           </div>
 
-          <div class="lg:col-span-4 rounded-[40px] bg-[#351164]/40 p-10">
+          <div class="feature-card lg:col-span-4 rounded-[40px] bg-[#351164]/40 p-10">
             <img src="assets/resource.png" alt="Resources" class="h-[60px] w-[60px]" />
             <h3 class="mt-4 text-[22px] leading-[27px] lg:text-[24px] lg:leading-[29px] font-bold">Rich Resources</h3>
             <p class="mt-4 text-base text-white/60 leading-6">
@@ -190,12 +315,13 @@
         </div>
 
         <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
-          <div class="flex flex-col">
+          <!-- ep 1 -->
+          <div class="card-hover flex flex-col">
             <div class="relative aspect-video rounded-t-[24px] overflow-hidden">
               <img src="https://img.youtube.com/vi/2ePf9rue1Ao/hqdefault.jpg" alt="The Future of AI in Everyday Life"
-                class="h-full w-full object-cover" />
+                class="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
               <div
-                class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[60px] w-[60px] rounded-full bg-[linear-gradient(135deg,#F7E93F_0%,#FB09B4_52%,#9100F8_100%)] flex items-center justify-center">
+                class="play absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[60px] w-[60px] rounded-full bg-[linear-gradient(135deg,#F7E93F_0%,#FB09B4_52%,#9100F8_100%)] flex items-center justify-center cursor-pointer">
                 <img src="assets/youtube.png" alt="Play" class="h-6 w-6" />
               </div>
             </div>
@@ -214,12 +340,14 @@
             </div>
           </div>
 
-          <div class="flex flex-col">
+          <!-- ep 2 -->
+          <div class="card-hover flex flex-col">
             <div class="relative aspect-video rounded-t-[24px] overflow-hidden">
               <img src="https://img.youtube.com/vi/h6fcK_fRYaI/hqdefault.jpg"
-                alt="Building Better Habits for Remote Work" class="h-full w-full object-cover" />
+                alt="Building Better Habits for Remote Work"
+                class="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
               <div
-                class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[60px] w-[60px] rounded-full bg-[linear-gradient(135deg,#F7E93F_0%,#FB09B4_52%,#9100F8_100%)] flex items-center justify-center">
+                class="play absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[60px] w-[60px] rounded-full bg-[linear-gradient(135deg,#F7E93F_0%,#FB09B4_52%,#9100F8_100%)] flex items-center justify-center cursor-pointer">
                 <img src="assets/youtube.png" alt="Play" class="h-6 w-6" />
               </div>
             </div>
@@ -237,12 +365,13 @@
             </div>
           </div>
 
-          <div class="flex flex-col">
+          <!-- ep 3 -->
+          <div class="card-hover flex flex-col">
             <div class="relative aspect-video rounded-t-[24px] overflow-hidden">
               <img src="https://img.youtube.com/vi/2ePf9rue1Ao/hqdefault.jpg" alt="Career Growth in Tech: A Roadmap"
-                class="h-full w-full object-cover" />
+                class="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
               <div
-                class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[60px] w-[60px] rounded-full bg-[linear-gradient(135deg,#F7E93F_0%,#FB09B4_52%,#9100F8_100%)] flex items-center justify-center">
+                class="play absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[60px] w-[60px] rounded-full bg-[linear-gradient(135deg,#F7E93F_0%,#FB09B4_52%,#9100F8_100%)] flex items-center justify-center cursor-pointer">
                 <img src="assets/youtube.png" alt="Play" class="h-6 w-6" />
               </div>
             </div>
@@ -280,16 +409,20 @@
               industry leaders and practical advice for anyone looking to grow in tech.
             </p>
             <div class="mt-4 flex items-center justify-center lg:justify-start gap-2">
-              <a href="#" class="h-10 w-10 rounded-full border border-[#533C72] flex items-center justify-center">
+              <a href="#"
+                class="social h-10 w-10 rounded-full border border-[#533C72] flex items-center justify-center">
                 <img src="assets/linkedin.png" alt="LinkedIn" class="h-4 w-4" />
               </a>
-              <a href="#" class="h-10 w-10 rounded-full border border-[#533C72] flex items-center justify-center">
+              <a href="#"
+                class="social h-10 w-10 rounded-full border border-[#533C72] flex items-center justify-center">
                 <img src="assets/x.png" alt="Twitter" class="h-4 w-4" />
               </a>
-              <a href="#" class="h-10 w-10 rounded-full border border-[#533C72] flex items-center justify-center">
+              <a href="#"
+                class="social h-10 w-10 rounded-full border border-[#533C72] flex items-center justify-center">
                 <img src="assets/instagram.png" alt="Instagram" class="h-4 w-4" />
               </a>
-              <a href="#" class="h-10 w-10 rounded-full border border-[#533C72] flex items-center justify-center">
+              <a href="#"
+                class="social h-10 w-10 rounded-full border border-[#533C72] flex items-center justify-center">
                 <img src="assets/youtube.png" alt="YouTube" class="h-4 w-4" />
               </a>
             </div>
